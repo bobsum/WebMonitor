@@ -6,5 +6,5 @@ http://<WebSite>/
 ```
 Call to monitor
 ```
-http://<WebSite>/Monitor/<OptinalPath>
+http://<WebSite>/Monitor/<OptionalPath>
 ```
