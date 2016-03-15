@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Web.Http;
 using Microsoft.AspNet.SignalR;
 
@@ -10,12 +9,10 @@ namespace WebMonitor
         private readonly IHubContext<IMonitorClient> _monitor = GlobalHost.ConnectionManager.GetHubContext<MonitorHub, IMonitorClient>();
 
         [HttpPost, HttpGet, HttpPut, HttpDelete]
-        public async Task<IHttpActionResult> All()
+        public async Task<IHttpActionResult> All(string connectionId)
         {
             var content = await Request.Content.ReadAsStringAsync();
-            var formattableString = $"{DateTime.Now}\r\n{Request}\r\n\r\n<em>{content}</em>";
-            _monitor.Clients.All.AddRequest(formattableString);
-
+            _monitor.Clients.Client(connectionId).AddRequest(new Request(Request.ToString(), content));
             return Ok();
         }
     }
