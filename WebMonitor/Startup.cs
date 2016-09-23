@@ -11,8 +11,7 @@ namespace WebMonitor
         public void Configuration(IAppBuilder app)
         {
             var config = new HttpConfiguration();
-            config.Routes.MapHttpRoute("All", "{connectionId}/{*all}", new {controller = "Monitor"});
-            //config.Routes.MapHttpRoute("DefaultApi", "api/{controller}/{id}", new { id = RouteParameter.Optional });
+            config.Routes.MapHttpRoute("All", "{channel}/{*all}", new {controller = "Monitor"});
             app.MapSignalR();
             app.UseWebApi(config);
         }

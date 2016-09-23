@@ -8,11 +8,11 @@ namespace WebMonitor
     {
         private readonly IHubContext<IMonitorClient> _monitor = GlobalHost.ConnectionManager.GetHubContext<MonitorHub, IMonitorClient>();
 
-        [HttpPost, HttpGet, HttpPut, HttpDelete]
-        public async Task<IHttpActionResult> All(string connectionId)
+        [HttpPost, HttpGet, HttpPut, HttpDelete, HttpPatch, HttpOptions, HttpHead]
+        public async Task<IHttpActionResult> All(string channel)
         {
             var content = await Request.Content.ReadAsStringAsync();
-            _monitor.Clients.Client(connectionId).AddRequest(new Request(Request.ToString(), content));
+            _monitor.Clients.Group(channel).AddRequest(new Request(Request.ToString(), content));
             return Ok();
         }
     }

@@ -26,7 +26,10 @@
 <body>
 <div class="container">
     <h1>Web Monitor</h1>
-    <div class="help">This monitor show all [Post, Get, Put, Delete] requests to <a target="_blank"></a> or sub paths.</div>
+    <div class="help">
+        This monitor show all [Post, Get, Put, Delete, Patch, Options, Head] requests to <a href="#" target="_blank" class="api"></a> or sub paths.<br/>
+        Monitor link: <a href="#" target="_blank" class="monitor"></a>
+    </div>
     <div class="requests"></div>
 </div>
     <script src="Scripts/jquery-2.2.1.min.js"></script>
@@ -36,20 +39,27 @@
     <script src="signalr/hubs"></script>
     <!--Add script to update the page and send messages.-->
     <script type="text/javascript">
-    $(function() {
-        var chat = $.connection.monitorHub;
-        chat.client.AddRequest = function (request) {
+        $(function () {
+            $('.help').hide();
+
+        var monitor = $.connection.monitorHub;
+        monitor.client.AddRequest = function (request) {
             $('<div class="request"/>')
                 .append($('<div class="time">').html(request.Time))
                 .append($('<div class="info">').html(request.Info))
                 .append($('<div class="content">').html(request.Content))
                 .prependTo('.requests')
                 .slideDown('slow');
-
         };
         $.connection.hub.start().done(function () {
-            var link = window.location.protocol + '//' + window.location.host + '/' + $.connection.hub.id + '/';
-            $('.help a').attr('href', link).html(link);
+            monitor.server.monitor(window.location.hash.replace(/^#/, ""))
+                .done(function(channel) {
+                    history.pushState(null, null, '#'+channel);
+                    var link = window.location.protocol + '//' + window.location.host;
+                    $('.help .api').attr('href', link + '/' + channel + '/').html(link + '/' + channel + '/');
+                    $('.help .monitor').attr('href', link + '#' + channel).html(link + '#' + channel);
+                    $('.help').show();
+                });
         });
     });
 </script>

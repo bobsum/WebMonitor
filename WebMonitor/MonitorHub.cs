@@ -1,13 +1,16 @@
-using System.Threading.Tasks;
+using System;
 using Microsoft.AspNet.SignalR;
 
 namespace WebMonitor
 {
     public class MonitorHub : Hub
     {
-        public override Task OnConnected()
+        public string Monitor(string channel)
         {
-            return base.OnConnected();
+            if(string.IsNullOrEmpty(channel)) channel = Guid.NewGuid().ToString("N");
+
+            Groups.Add(Context.ConnectionId, channel);
+            return channel;
         }
     }
 }
