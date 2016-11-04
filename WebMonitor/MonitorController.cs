@@ -13,7 +13,7 @@ namespace WebMonitor
         {
             var content = await Request.Content.ReadAsStringAsync();
             _monitor.Clients.Group(channel).AddRequest(new Request(Request.ToString(), content));
-            return Ok();
+            return Ok(new { Success = true });
         }
     }
 }

@@ -1,0 +1,15 @@
+﻿body { font-family: sans-serif; }
+a { color: #428bca; }
+a:hover, a:focus { color: #2a6496; }
+.help { margin-bottom: 30px; }
+.api { word-break: break-all; }
+.app-header { background-color: #f0f0f0; border-bottom: 1px solid #e0e0e0; padding: 5px 15px; margin-bottom: 15px; }
+.app-header h1 { margin: 0; font-weight: normal; font-size: larger; color: gray; }
+.app-header .monitor-link { color: inherit; text-decoration: none; }
+.container { margin: 0 auto; padding: 0 15px; }
+.requests { margin-bottom: 30px; }
+.request { border: 1px solid #ccc; padding: 5px; border-radius: 3px; margin-bottom: 10px; font-size: smaller; }
+.time { margin: 0 -5px; padding: 0 5px 5px; font-weight: bold;  }
+.info { margin: 0 -5px; padding: 5px; border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; background-color: #f9f9f9;}
+.content { margin: 0 -5px; padding: 5px 5px 0; font-style: italic; }
+.app-footer { color: #777; text-align: center;font-size: smaller; }
